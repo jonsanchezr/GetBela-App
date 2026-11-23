@@ -19,10 +19,10 @@ class InitialSetupSeeder extends Seeder
         $this->call(CategorySeeder::class);
 
         $admin = User::firstOrCreate(
-            ['email' => 'admin@getbela.com'],
+            ['email' => self::adminEmail()],
             [
                 'name' => 'Admin GetBela',
-                'password' => Hash::make('password123'),
+                'password' => Hash::make(self::adminPassword()),
                 'role' => 'admin',
                 'business_id' => null,
             ]
@@ -35,5 +35,28 @@ class InitialSetupSeeder extends Seeder
                 'business_id' => null,
             ]);
         }
+    }
+
+    /**
+     * Email del super administrador.
+     *
+     * Configurable por GETBELA_ADMIN_EMAIL para no dejar la direccion de
+     * ejemplo hardcodeada en el seeder de produccion.
+     */
+    private static function adminEmail(): string
+    {
+        return (string) (env('GETBELA_ADMIN_EMAIL') ?: 'admin@getbela.com');
+    }
+
+    /**
+     * Password del super administrador.
+     *
+     * En produccion llega por GETBELA_ADMIN_PASSWORD, que el grupo declara
+     * en su .env. Sin esa variable se usa la de desarrollo, que es publica y
+     * no debe quedar en un despliegue real.
+     */
+    private static function adminPassword(): string
+    {
+        return (string) (env('GETBELA_ADMIN_PASSWORD') ?: 'password123');
     }
 }
