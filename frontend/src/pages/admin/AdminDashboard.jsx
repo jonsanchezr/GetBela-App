@@ -1,5 +1,6 @@
 import React, { useCallback, useEffect, useState } from "react";
 import api from "../../api/axios";
+import { apiUrl } from "../../api/apiUrl";
 import {
   Building2,
   CalendarCheck,
@@ -55,7 +56,7 @@ const BusinessLogo = ({ business }) => {
   if (business.logo && !failed) {
     return (
       <img
-        src={`http://localhost:8000/storage/${business.logo}`}
+        src={apiUrl(`/storage/${business.logo}`)}
         alt={business.name}
         className="w-10 h-10 rounded-full object-cover border border-gray-200"
         onError={() => setFailed(true)}

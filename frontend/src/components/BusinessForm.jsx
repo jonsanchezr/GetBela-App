@@ -66,7 +66,7 @@ const BusinessForm = ({
                       typeof formData.logo === "string" &&
                       formData.logo.trim() !== "" &&
                       !formData.logo.startsWith("http")
-                    ? `http://localhost:8000/storage/${formData.logo}`
+                    ? `${import.meta.env.VITE_API_URL ?? ""}/storage/${formData.logo}`
                     : formData.logo && typeof formData.logo === "string" && formData.logo.trim() !== ""
                       ? formData.logo
                       : undefined

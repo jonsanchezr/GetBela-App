@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import api from "../../api/axios";
+import { apiUrl } from "../../api/apiUrl";
 import { Plus, Pencil, Trash2, Image as ImageIcon } from "lucide-react";
 import BannersForm from "../../components/admin/BannersForm";
 
@@ -157,7 +158,7 @@ const BannersList = () => {
                 const imgSrc = banner.image?.startsWith("http")
                   ? banner.image
                   : banner.image?.startsWith("/storage/")
-                  ? `http://localhost:8000${banner.image}`
+                  ? apiUrl(`${banner.image}`)
                   : banner.image;
                 return (
                   <tr key={banner.id} className="hover:bg-gray-50">

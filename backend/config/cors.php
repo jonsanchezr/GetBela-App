@@ -19,7 +19,19 @@ return [
 
     'allowed_methods' => ['*'],
 
-    'allowed_origins' => ['http://localhost:5173'],
+    // Los origenes permitidos vienen de la variable de entorno
+    // CORS_ALLOWED_ORIGINS, separada por comas.
+    //
+    // En desarrollo (compose) son los dos loopbacks del Vite dev server:
+    // el navegador manda uno u otro segun como se abrio la pagina, y una
+    // diferencia aqui falla toda llamada a la API con error de CORS.
+    //
+    // En produccion es el dominio real del sitio
+    // (https://getbela.syrexsoftware.com). El valor por defecto mantiene el
+    // comportamiento de desarrollo si la variable no esta definida.
+    'allowed_origins' => array_values(array_filter(
+        array_map('trim', explode(',', (string) env('CORS_ALLOWED_ORIGINS', 'http://localhost:5173,http://127.0.0.1:5173')))
+    )),
 
     'allowed_origins_patterns' => [],
 

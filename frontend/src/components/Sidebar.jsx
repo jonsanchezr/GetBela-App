@@ -19,7 +19,7 @@ const Sidebar = () => {
             </span>
             {user.business.logo && (
               <img
-                src={`http://localhost:8000/storage/${user.business.logo}`}
+                src={`${import.meta.env.VITE_API_URL ?? ""}/storage/${user.business.logo}`}
                 alt="Logo"
                 className="absolute inset-0 w-full h-full object-cover"
                 onError={(e) => {

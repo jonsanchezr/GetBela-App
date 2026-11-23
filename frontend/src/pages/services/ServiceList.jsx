@@ -1,6 +1,7 @@
 // src/pages/services/ServiceList.jsx
 import React, { useState, useEffect } from "react";
 import api from "../../api/axios"; // Asegura la ruta a tu instancia de axios
+import { apiUrl } from "../../api/apiUrl";
 import ServiceForm from "../../components/services/ServiceForm";
 
 const ServiceList = () => {
@@ -144,7 +145,7 @@ const ServiceList = () => {
               <td className="p-4">
                 {service.image_url ? (
                   <img
-                    src={`http://localhost:8000/storage/${service.image_url}`}
+                    src={apiUrl(`/storage/${service.image_url}`)}
                     alt={service.name}
                     className="w-12 h-12 rounded object-cover" // Cuadrada 12x12
                   />

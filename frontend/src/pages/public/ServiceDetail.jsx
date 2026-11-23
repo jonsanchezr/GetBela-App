@@ -2,6 +2,7 @@
 import React, { useEffect, useState } from "react";
 import { useParams, Link } from "react-router-dom";
 import api from "../../api/axios";
+import { apiUrl } from "../../api/apiUrl";
 import MainLayout from "../../layouts/MainLayout";
 import {
   Sparkles,
@@ -84,7 +85,7 @@ const ServiceDetail = () => {
                 src={
                   service.image_url.startsWith("http")
                     ? service.image_url
-                    : `http://localhost:8000/storage/${service.image_url}`
+                    : apiUrl(`/storage/${service.image_url}`)
                 }
                 alt={service.name}
                 className="w-full h-full object-cover"

@@ -1,5 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import { apiUrl } from "../../api/apiUrl";
 
 const ServiceCard = ({ service, businessName }) => {
   return (
@@ -14,7 +15,7 @@ const ServiceCard = ({ service, businessName }) => {
               src={
                 service.image_url.startsWith("http")
                   ? service.image_url
-                  : `http://localhost:8000/storage/${service.image_url}`
+                  : apiUrl(`/storage/${service.image_url}`)
               }
               alt={service.name}
               className="w-full h-full object-cover"

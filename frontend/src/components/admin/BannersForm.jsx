@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useId } from "react";
 import Modal from "../Modal";
+import { apiUrl } from "../../api/apiUrl";
 
 const BannersForm = ({ isOpen, onClose, onSubmit, initialData, editingId }) => {
   const [formData, setFormData] = useState({
@@ -20,7 +21,7 @@ const BannersForm = ({ isOpen, onClose, onSubmit, initialData, editingId }) => {
         initialData.image?.startsWith("http")
           ? initialData.image
           : initialData.image?.startsWith("/storage/")
-          ? `http://localhost:8000${initialData.image}`
+          ? apiUrl(`${initialData.image}`)
           : initialData.image
       );
     } else {

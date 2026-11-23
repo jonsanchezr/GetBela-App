@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom"; // Si usas React Router
 import api from "../../api/axios";
+import { apiUrl } from "../../api/apiUrl";
 import MainLayout from "../../layouts/MainLayout";
 import ServiceCard from "../../components/public/ServiceCard";
 
@@ -43,7 +44,7 @@ const BusinessProfileView = () => {
             <div className="w-32 h-32 md:w-40 md:h-40 rounded-full border-4 border-purple-100 overflow-hidden bg-gray-100 shrink-0 shadow-md">
               <img
                 src={
-                  `http://localhost:8000/storage/${business.logo}`
+                  apiUrl(`/storage/${business.logo}`)
                 }
                 alt={business.name || "Negocio"}
                 className="w-full h-full object-cover"

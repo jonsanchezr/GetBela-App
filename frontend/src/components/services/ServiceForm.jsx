@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useId } from "react";
 import Modal from "../Modal";
+import { apiUrl } from "../../api/apiUrl";
 
 // Construye el estado inicial del formulario a partir de la data recibida.
 const buildInitialData = (initialData) =>
@@ -124,7 +125,7 @@ const ServiceForm = ({
                   : formData.image_url &&
                       typeof formData.image_url === "string" &&
                       !formData.image_url.startsWith("http")
-                    ? `http://localhost:8000/storage/${formData.image_url}` // 2. Si es la ruta guardada en BD
+                    ? apiUrl(`/storage/${formData.image_url}`) // 2. Si es la ruta guardada en BD
                     : formData.image_url // 3. Si es una URL completa externa
               }
               alt="Preview"

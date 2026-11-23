@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import api from "../../api/axios";
+import { apiUrl } from "../../api/apiUrl";
 import MainLayout from "../../layouts/MainLayout";
 import { Sparkles, Scissors, Eye, Palette, Smile, HeartPulse } from "lucide-react";
 import { useSearch } from "../../context/SearchContext";
@@ -99,7 +100,7 @@ const HomeCatalog = () => {
                 const imageSrc = banner.image?.startsWith('http')
                   ? banner.image
                   : banner.image?.startsWith('/storage/')
-                    ? `http://localhost:8000${banner.image}`
+                    ? apiUrl(`${banner.image}`)
                     : banner.image;
 
                 const slideContent = (
