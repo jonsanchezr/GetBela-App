@@ -8,16 +8,21 @@ import axios from "axios";
 // absoluta.
 //
 // En produccion el frontend y la API se sirven bajo el mismo dominio
-// (https://getbela.syrexsoftware.com), servidos por Traefik. Ahi conviene
-// una ruta relativa ("/api"), que ademas elimina el problema de CORS y de
-// cookies de terceros. Se define con VITE_API_URL al compilar.
+// (https://getbela.syrexsoftware.com). Ahi la URL debe ser RELATIVA: las
+// rutas del codigo ya incluyen el prefijo /api (por ejemplo
+// api.get("/api/services")), asi que un baseURL con /api produciria
+// /api/api/services.
 //
-// Si VITE_API_URL queda vacio, se usa la ruta relativa: es el comportamiento
-// correcto cuando frontend y backend comparten dominio.
+// Con la base vacia, axios resuelve contra el dominio actual y la ruta
+// relativa ya incluye /api. Esto ademas elimina el problema de CORS y de
+// las cookies de terceros.
+//
+// Se define con VITE_API_URL al compilar. En produccion se deja SIN
+// DEFINIR (o vacio).
 const API_URL = import.meta.env.VITE_API_URL ?? "";
 
 const api = axios.create({
-  baseURL: API_URL || "/api",
+  baseURL: API_URL,
   withCredentials: true,
   withXSRFToken: true,
   headers: {
